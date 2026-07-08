@@ -13,8 +13,6 @@ public class RoadManager : MonoBehaviour
     [SerializeField] private float yScale;
     */
 
-    [SerializeField] SpriteRenderer renderer;
-
     [SerializeField] InputActionReference move;
     //[SerializeField] GameObject plr;
 

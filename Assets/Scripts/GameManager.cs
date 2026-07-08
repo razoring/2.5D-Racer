@@ -30,15 +30,18 @@ public class GameManager : MonoBehaviour
             float spawnY = 0f;
             if (last != null)
             {
-                SpriteRenderer lastRenderer = last.GetComponent<SpriteRenderer>();
-                if (lastRenderer != null)
+                float previousHeight = 1f;
+                SpriteRenderer lastRenderer = last.GetComponentInChildren<SpriteRenderer>();
+                if (lastRenderer != null && lastRenderer.sprite != null)
                 {
-                    spawnY = last.transform.position.y - lastRenderer.bounds.size.y;
+                    previousHeight = lastRenderer.bounds.size.y;
                 }
                 else
                 {
-                    spawnY = last.transform.position.y - last.transform.localScale.y;
+                    previousHeight = last.transform.localScale.y;
                 }
+
+                spawnY = last.transform.position.y - previousHeight;
             }
 
             GameObject strip = Instantiate(road, new UnityEngine.Vector3(0f, spawnY, 99f), UnityEngine.Quaternion.identity);
@@ -48,17 +51,6 @@ public class GameManager : MonoBehaviour
                 strip.transform.localScale = new UnityEngine.Vector3(previousXScale * offset, previousXScale * offset, strip.transform.localScale.z);
             }
             last = strip;
-
-            if (strip.transform.position.y <= bottomEdge)
-            {
-                break;
-            }
-
-            if (strip.GetComponent<SpriteRenderer>() != null && strip.GetComponent<SpriteRenderer>().bounds.size.y <= 0.0001f)
-            {
-                Debug.LogWarning("Road tile height is zero; stopping spawn loop.");
-                break;
-            }
         }
     }
 
