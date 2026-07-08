@@ -9,7 +9,7 @@ using UnityEngine.Sprites;
 
 public class Movement : MonoBehaviour
 {   
-    [SerializeField] Transform pos;
+    [SerializeField] Transform obj;
     [SerializeField] Rigidbody2D rb;
     [SerializeField] InputActionReference move;
     [SerializeField] float scaled;
@@ -39,6 +39,8 @@ public class Movement : MonoBehaviour
             moveDir = move.action.ReadValue<UnityEngine.Vector2>();
             rb.linearVelocity = new UnityEngine.Vector2(moveDir.x*rot, moveDir.y);
         }
-        renderer.sprite = frames[idleFrame+((int)pos.position.x-FindAnyObjectByType<RoadManager>().getMiddle())];
+        renderer.sprite = frames[idleFrame+((int)obj.position.x-FindAnyObjectByType<RoadManager>().getMiddle())];
+
+        obj.localScale = new UnityEngine.Vector3(Math.Abs(obj.position.y)/2*scaled,Math.Abs(obj.position.y)/2*scaled);
     }   
 }

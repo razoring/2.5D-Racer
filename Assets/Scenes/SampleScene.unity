@@ -209,7 +209,7 @@ Transform:
   m_GameObject: {fileID: 22649999}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4, y: -2.15, z: 0}
+  m_LocalPosition: {x: 4, y: -2, z: 0}
   m_LocalScale: {x: 1.7, y: 1.7, z: -1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -284,11 +284,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42acc9a1dfed26440a9acba5f1d21a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Animator
-  pos: {fileID: 22650001}
+  obj: {fileID: 22650001}
   rb: {fileID: 22650006}
   move: {fileID: -5812089189495725956, guid: ad447d08116bbf14db2f2e05596fd1ad, type: 3}
-  scaled: 0.9
-  rotation: 2
+  scaled: 0.8
   renderer: {fileID: 22650000}
   idleFrame: 12
   frameFolder: Toyota_Sprites
@@ -511,6 +510,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   road: {fileID: 7107228130046856177, guid: 8a7a7e4c3db0f4f4785206ef5bb25086, type: 3}
   rate: 1.1
+  rotation: 2
+  speed: 1
 --- !u!1 &871198865
 GameObject:
   m_ObjectHideFlags: 0
@@ -645,11 +646,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42acc9a1dfed26440a9acba5f1d21a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Movement
-  pos: {fileID: 871198867}
+  obj: {fileID: 871198867}
   rb: {fileID: 871198869}
   move: {fileID: 0}
   scaled: 1
-  rotation: 2
   renderer: {fileID: 871198866}
   idleFrame: 39
   frameFolder: BMW_Sprites
