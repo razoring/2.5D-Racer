@@ -1,12 +1,18 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class RoadManager : MonoBehaviour
 {
     [SerializeField] private Transform pos;
     [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private float gravity;
-    [SerializeField] private float xScale;
-    [SerializeField] private float yScale;
+    [SerializeField] private InputActionReference move;
+    private float rot = 0f;
+
+    private void Start()
+    {
+        rot = FindAnyObjectByType<GameManager>().getRotation();
+    }
 
     private void Update()
     {
@@ -26,6 +32,11 @@ public class RoadManager : MonoBehaviour
             Destroy(gameObject); 
         }*/
 
-        
+        Vector2 moveDir = move.action.ReadValue<Vector2>();
+        rb.linearVelocity = new Vector2(moveDir.x*-rot,moveDir.y);
+    }
+
+    public int getMiddle() {
+        return (int)transform.position.x;
     }
 }

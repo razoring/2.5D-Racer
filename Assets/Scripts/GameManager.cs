@@ -6,6 +6,8 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] GameObject road; //prefab
     [SerializeField] float rate;
+    public float rotation = 2;
+    public float speed = 1;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -59,8 +61,8 @@ public class GameManager : MonoBehaviour
         */
     }
 
-    public float getRate()
+    public float getRotation()
     {
-        return rate;
+        return rotation;
     }
 }
