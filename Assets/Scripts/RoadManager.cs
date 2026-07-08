@@ -10,7 +10,7 @@ public class RoadManager : MonoBehaviour
 
     private void Update()
     {
-        if (Camera.main == null)
+        /*if (Camera.main == null)
         {
             return;
         }
@@ -23,7 +23,7 @@ public class RoadManager : MonoBehaviour
 
         if (transform.position.y < edge)
         {
-            Destroy(gameObject);
-        }
+            Destroy(gameObject); 
+        }*/
     }
 }
