@@ -12,6 +12,7 @@ public class Movement : MonoBehaviour
     [SerializeField] Transform pos;
     [SerializeField] Rigidbody2D rb;
     [SerializeField] InputActionReference move;
+    [SerializeField] float scaled;
     private float rotation = 5;
     public float speed = 1;
     private UnityEngine.Vector2 moveDir;
