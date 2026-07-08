@@ -9,6 +9,8 @@ public class RoadManager : MonoBehaviour
     [SerializeField] private InputActionReference move;
     private float rot = 0f;
     private GameManager gm;
+    private float _currentDamping = 1f;
+    private float _currentOffset = 0f;
 
     private void Start()
     {
@@ -51,10 +53,21 @@ public class RoadManager : MonoBehaviour
         float distanceFromCenter = Mathf.Abs(pos != null ? pos.position.y : transform.position.y);
         float baseCurveStrength = gm.getCurve() * Mathf.Exp(-distanceFromCenter);
 
-        float inputStrength = Mathf.Abs(moveDir.x);
-        float damping = Mathf.Lerp(1f, 0.25f, inputStrength);
+        if (Mathf.Abs(moveDir.x) < 0.01f)
+        {
+            _currentDamping = Mathf.Lerp(_currentDamping, 1f, Time.deltaTime);
+        }
+        else if (gm.getCurve() * moveDir.x > 0f)
+        {
+            _currentDamping = Mathf.Lerp(_currentDamping, -1f, Time.deltaTime);
+        }
+        else
+        {
+            _currentDamping = Mathf.Lerp(_currentDamping, 2f, Time.deltaTime);
+        }
 
-        float targetX = baseCurveStrength * damping;
+        _currentOffset = Mathf.Lerp(_currentOffset, -moveDir.x * gm.speed, Time.deltaTime * 5f);
+        float targetX = baseCurveStrength * _currentDamping + _currentOffset;
         rb.MovePosition(new Vector2(targetX, rb.position.y));
     }
 
