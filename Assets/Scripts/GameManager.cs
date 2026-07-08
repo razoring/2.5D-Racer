@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] GameObject road; //prefab
-    public float rate;
+    public float offset;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
             if (last != null)
             {
                 float previousXScale = last.transform.localScale.x;
-                strip.transform.localScale = new UnityEngine.Vector3(previousXScale * rate, previousXScale * rate, strip.transform.localScale.z);
+                strip.transform.localScale = new UnityEngine.Vector3(previousXScale*offset, previousXScale*offset, strip.transform.localScale.z);
             }
             last = strip;
 
@@ -59,8 +59,8 @@ public class GameManager : MonoBehaviour
         */
     }
 
-    public float getRate()
+    public float getOffset()
     {
-        return rate;
+        return offset;
     }
 }

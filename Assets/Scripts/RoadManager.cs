@@ -1,12 +1,22 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class RoadManager : MonoBehaviour
 {
+    
     [SerializeField] private Transform pos;
     [SerializeField] private Rigidbody2D rb;
+    /*
     [SerializeField] private float gravity;
     [SerializeField] private float xScale;
     [SerializeField] private float yScale;
+    */
+
+    [SerializeField] SpriteRenderer renderer;
+
+    [SerializeField] InputActionReference move;
+    [SerializeField] GameObject plr;
 
     private void Update()
     {
@@ -26,6 +36,7 @@ public class RoadManager : MonoBehaviour
             Destroy(gameObject); 
         }*/
 
-        
+        Vector2 moveDir = move.action.ReadValue<UnityEngine.Vector2>();
+        rb.linearVelocity = new UnityEngine.Vector2(moveDir.x*-FindAnyObjectByType<GameManager>().getOffset(), moveDir.y);
     }
 }
