@@ -16,7 +16,7 @@ public class RoadManager : MonoBehaviour
     [SerializeField] SpriteRenderer renderer;
 
     [SerializeField] InputActionReference move;
-    [SerializeField] GameObject plr;
+    //[SerializeField] GameObject plr;
 
     private void Update()
     {
@@ -36,7 +36,12 @@ public class RoadManager : MonoBehaviour
             Destroy(gameObject); 
         }*/
 
+        if (rb == null || move == null || move.action == null)
+        {
+            return;
+        }
+
         Vector2 moveDir = move.action.ReadValue<UnityEngine.Vector2>();
-        rb.linearVelocity = new UnityEngine.Vector2(moveDir.x*-FindAnyObjectByType<GameManager>().getOffset(), moveDir.y);
+        rb.linearVelocity = new UnityEngine.Vector2(moveDir.x * -2f, moveDir.y);
     }
 }

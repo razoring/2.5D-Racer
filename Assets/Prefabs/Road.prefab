@@ -107,11 +107,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ac73f1fcc57aef44ab2445a4451adeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RoadManager
-  pos: {fileID: 0}
+  pos: {fileID: 1840355904842181961}
   rb: {fileID: 3721354085317828153}
   renderer: {fileID: 988346891021637318}
   move: {fileID: -5812089189495725956, guid: ad447d08116bbf14db2f2e05596fd1ad, type: 3}
-  plr: {fileID: 0}
 --- !u!50 &3721354085317828153
 Rigidbody2D:
   serializedVersion: 5

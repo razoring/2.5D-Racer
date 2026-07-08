@@ -9,6 +9,12 @@ public class GameManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        if (road == null)
+        {
+            Debug.LogError("GameManager has no road prefab assigned.");
+            return;
+        }
+
         Camera cam = Camera.main;
         if (cam == null)
         {
@@ -19,7 +25,7 @@ public class GameManager : MonoBehaviour
         float bottomEdge = cam.ScreenToWorldPoint(new UnityEngine.Vector3(0f, 0f, 0f)).y - 1f;
         GameObject last = null;
 
-        while (true)
+        for (int i = 0; i < 1000; i++)
         {
             float spawnY = 0f;
             if (last != null)
@@ -27,11 +33,11 @@ public class GameManager : MonoBehaviour
                 SpriteRenderer lastRenderer = last.GetComponent<SpriteRenderer>();
                 if (lastRenderer != null)
                 {
-                    spawnY = last.transform.position.y - (lastRenderer.bounds.size.y);
+                    spawnY = last.transform.position.y - lastRenderer.bounds.size.y;
                 }
                 else
                 {
-                    spawnY = last.transform.position.y - (last.transform.localScale.y);
+                    spawnY = last.transform.position.y - last.transform.localScale.y;
                 }
             }
 
@@ -39,12 +45,18 @@ public class GameManager : MonoBehaviour
             if (last != null)
             {
                 float previousXScale = last.transform.localScale.x;
-                strip.transform.localScale = new UnityEngine.Vector3(previousXScale*offset, previousXScale*offset, strip.transform.localScale.z);
+                strip.transform.localScale = new UnityEngine.Vector3(previousXScale * offset, previousXScale * offset, strip.transform.localScale.z);
             }
             last = strip;
 
             if (strip.transform.position.y <= bottomEdge)
             {
+                break;
+            }
+
+            if (strip.GetComponent<SpriteRenderer>() != null && strip.GetComponent<SpriteRenderer>().bounds.size.y <= 0.0001f)
+            {
+                Debug.LogWarning("Road tile height is zero; stopping spawn loop.");
                 break;
             }
         }
@@ -57,10 +69,5 @@ public class GameManager : MonoBehaviour
         /*
         GameObject strip2 = Instantiate(road, new UnityEngine.Vector3(0,0.05f,0), UnityEngine.Quaternion.identity);
         */
-    }
-
-    public float getOffset()
-    {
-        return offset;
     }
 }
