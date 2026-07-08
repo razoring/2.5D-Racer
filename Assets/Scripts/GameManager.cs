@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] float rate;
     public float rotation = 2;
     public float speed = 1;
+    [SerializeField] float curve;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -64,5 +65,9 @@ public class GameManager : MonoBehaviour
     public float getRotation()
     {
         return rotation;
+    }
+
+    public float getCurve(){
+        return curve;
     }
 }

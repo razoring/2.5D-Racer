@@ -8,10 +8,19 @@ public class RoadManager : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private InputActionReference move;
     private float rot = 0f;
+    private GameManager gm;
 
     private void Start()
     {
-        rot = FindAnyObjectByType<GameManager>().getRotation();
+        gm = FindAnyObjectByType<GameManager>();
+        if (gm != null)
+        {
+            rot = gm.getRotation();
+        }
+        else
+        {
+            Debug.LogWarning("GameManager not found in RoadManager.Start().");
+        }
     }
 
     private void Update()
@@ -32,8 +41,21 @@ public class RoadManager : MonoBehaviour
             Destroy(gameObject); 
         }*/
 
+        if (rb == null || move == null || move.action == null || gm == null)
+        {
+            return;
+        }
+
         Vector2 moveDir = move.action.ReadValue<Vector2>();
-        rb.linearVelocity = new Vector2(moveDir.x*-rot,moveDir.y);
+
+        float distanceFromCenter = Mathf.Abs(pos != null ? pos.position.y : transform.position.y);
+        float baseCurveStrength = gm.getCurve() * Mathf.Exp(-distanceFromCenter);
+
+        float inputStrength = Mathf.Abs(moveDir.x);
+        float damping = Mathf.Lerp(1f, 0.25f, inputStrength);
+
+        float targetX = baseCurveStrength * damping;
+        rb.MovePosition(new Vector2(targetX, rb.position.y));
     }
 
     public int getMiddle() {
