@@ -287,7 +287,7 @@ MonoBehaviour:
   pos: {fileID: 22650001}
   rb: {fileID: 22650006}
   move: {fileID: -5812089189495725956, guid: ad447d08116bbf14db2f2e05596fd1ad, type: 3}
-  speed: 2
+  speed: 1
   renderer: {fileID: 22650000}
   idleFrame: 12
   frameFolder: Toyota_Sprites
@@ -509,7 +509,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   road: {fileID: 7107228130046856177, guid: 8a7a7e4c3db0f4f4785206ef5bb25086, type: 3}
-  rate: 0.01
+  rate: 1.1
 --- !u!1 &871198865
 GameObject:
   m_ObjectHideFlags: 0

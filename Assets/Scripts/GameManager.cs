@@ -9,24 +9,43 @@ public class GameManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        bool finished = false;
-        float edge = Camera.main.ScreenToWorldPoint(new UnityEngine.Vector3(0f, 0f, 0f)).y - 1f;
+        Camera cam = Camera.main;
+        if (cam == null)
+        {
+            Debug.LogWarning("No main camera found.");
+            return;
+        }
+
+        float bottomEdge = cam.ScreenToWorldPoint(new UnityEngine.Vector3(0f, 0f, 0f)).y - 1f;
         GameObject last = null;
 
-        while (finished == false) {
-            Debug.Log("Hello World");
-            float size = 0;
-            float pos = 0;
-            if (last!=null)
+        while (true)
+        {
+            float spawnY = 0f;
+            if (last != null)
             {
-                size = last.transform.localScale.y/2;
-                pos = last.transform.position.y;
+                SpriteRenderer lastRenderer = last.GetComponent<SpriteRenderer>();
+                if (lastRenderer != null)
+                {
+                    spawnY = last.transform.position.y - (lastRenderer.bounds.size.y);
+                }
+                else
+                {
+                    spawnY = last.transform.position.y - (last.transform.localScale.y);
+                }
             }
-            GameObject strip = Instantiate(road, new UnityEngine.Vector3(0,pos+size,0), UnityEngine.Quaternion.identity);
-            last = strip;
-            if (transform.position.y < edge)
+
+            GameObject strip = Instantiate(road, new UnityEngine.Vector3(0f, spawnY, 99f), UnityEngine.Quaternion.identity);
+            if (last != null)
             {
-                finished = true;
+                float previousXScale = last.transform.localScale.x;
+                strip.transform.localScale = new UnityEngine.Vector3(previousXScale * rate, previousXScale * rate, strip.transform.localScale.z);
+            }
+            last = strip;
+
+            if (strip.transform.position.y <= bottomEdge)
+            {
+                break;
             }
         }
     }
