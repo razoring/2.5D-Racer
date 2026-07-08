@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] GameObject road; //prefab
-    public float rate;
+    [SerializeField] float rate;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
