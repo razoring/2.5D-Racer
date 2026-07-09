@@ -18,6 +18,12 @@ public class GameManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        if (road == null)
+        {
+            Debug.LogError("GameManager has no road prefab assigned.");
+            return;
+        }
+
         Camera cam = Camera.main;
         if (cam == null)
         {
@@ -45,20 +51,23 @@ public class GameManager : MonoBehaviour
         GameObject last = null;
         int i = 0;
 
-        while (true)
+        for (int i = 0; i < 1000; i++)
         {
             float spawnY = 0f;
             if (last != null)
             {
-                SpriteRenderer lastRenderer = last.GetComponent<SpriteRenderer>();
-                if (lastRenderer != null)
+                float previousHeight = 1f;
+                SpriteRenderer lastRenderer = last.GetComponentInChildren<SpriteRenderer>();
+                if (lastRenderer != null && lastRenderer.sprite != null)
                 {
                    spawnY = last.transform.position.y - (lastRenderer.bounds.size.y);
                 }
                 else
                 {
-                    spawnY = last.transform.position.y - (last.transform.localScale.y);
+                    previousHeight = last.transform.localScale.y;
                 }
+
+                spawnY = last.transform.position.y - previousHeight;
             }
 
             GameObject strip = Instantiate(road, new UnityEngine.Vector3(0f, spawnY, 99f), UnityEngine.Quaternion.identity);

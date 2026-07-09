@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 
 public class RoadManager : MonoBehaviour
 {
+    
     [SerializeField] private Transform pos;
     [SerializeField] public InputActionReference move;
     public int segmentIndex;
