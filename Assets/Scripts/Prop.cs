@@ -45,7 +45,7 @@ public class Prop : MonoBehaviour
         float visualScale = Mathf.Lerp(0f, 0.7f, t);
         float positionScale = Mathf.Lerp(0.1f, 0.7f, t); // Matches road width perspective
         
-        transform.localScale = originalScale * visualScale * 8f;
+        transform.localScale = originalScale * visualScale * 15f;
 
         // Apply alpha fade for the very beginning to smooth the pop-in
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
